@@ -23,8 +23,6 @@ const SearchBar = () => {
 
     };
 
-    console.log(repos);
-
     return (
         <Fragment>
         <div className="row" style={{ marginTop: 30, marginBottom: 30 }}>
