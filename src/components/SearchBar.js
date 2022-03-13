@@ -6,6 +6,14 @@ import RepoList from "./RepoList";
 const SearchBar = () => {
     const [searchInput, setSearchInput] = useState('');
     const [repos, setRepos] = useState([]);
+    const [post, setPost] = useState([]);
+
+    const getPostAPI = () => {
+        axios.get(`https://api.github.com/users/${searchInput}`)
+        .then(data => {
+            setPost(data);
+        })
+    }
 
     const handleChange = (event) => {
         setSearchInput(event.target.value)
@@ -16,7 +24,10 @@ const SearchBar = () => {
 
         try {
             const res = await axios(`https://api.github.com/users/${searchInput}/repos`)
-            setRepos(res);       
+            setRepos(res);
+
+            getPostAPI()
+                
         } catch(err) {
             console.log(err)
         }
@@ -54,8 +65,13 @@ const SearchBar = () => {
             </div>
             </div>
         </div>
-        <Profile />
+        <div className="card" style={{ width:500 }}>
+            <div className="card-body">
+                <h3 className="card-title">Result Repository List</h3>
+            </div>
+        </div>
         <RepoList repos={repos} />
+        <Profile post={post} />
         </Fragment>
     )
 }
