@@ -4,12 +4,20 @@ const RepoList = (props) => {
     const {repos} = props;
     console.log('Repos: ', repos);
 
+    const repoList = repos.length !== 0 ? (
+        repos.data.map((item) => (
+        <li className="list-group-item" key={item.id}>
+            <a href={item.html_url}>{item.name}</a>
+        </li>
+        ))
+    ) : (
+        <li className="list-group-item">No Repository</li>
+    );
+
     return (
         <div>
             <ul className="list-group list-group-flush">
-                <li className="list-group-item">repo 1</li>
-                <li className="list-group-item">repo 2</li>
-                <li className="list-group-item">repo 3</li>
+                {repoList}
             </ul>
         </div>
     )
