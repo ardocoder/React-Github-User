@@ -1,6 +1,22 @@
-import React from "react";
+import axios from "axios";
+import React, {useState} from "react";
 
-const SearchBar = (props) => {
+const SearchBar = () => {
+    const [searchInput, setSearchInput] = useState('');
+    const [repos, setRepos] = useState([]);
+
+    const handleChange = (event) => {
+        setSearchInput(event.target.value)
+    }
+    
+    const handleClick = async () => {
+        console.log(searchInput)
+
+        const res = await axios('https://api.github.com/users/:username')
+
+        setRepos(res);
+    }
+
     return (
         <div className="row" style={{ marginTop: 30, marginBottom: 30 }}>
             <div className="col">
@@ -13,15 +29,15 @@ const SearchBar = (props) => {
                         className="form-control"
                         type="text"
                         placeholder="Type github username"
-                        value={props.value}
-                        onChange={props.onChange}
+                        value={searchInput}
+                        onChange={handleChange}
                     />
                     </div>
                     <div className="col-1">
                     <button
                         className="btn btn-primary"
                         type="button"
-                        onClick={props.onClickSearch}
+                        onClick={handleClick}
                     >
                         Search
                     </button>
