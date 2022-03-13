@@ -1,6 +1,9 @@
 import React from "react";
 
-const RepoList = () => {
+const RepoList = (props) => {
+    const {repos} = props;
+    console.log('Repos: ', repos);
+
     return (
         <div>
             <ul className="list-group list-group-flush">

@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
-import Navbar from "../../components/Navbar";
-import SearchBar from "../../components/SearchBar";
-import Profile from "../Profile/Profile";
+import Navbar from "../components/Navbar";
+import SearchBar from "../components/SearchBar";
 
 class Home extends Component {
     render() {
@@ -10,7 +9,6 @@ class Home extends Component {
                 <Navbar />
                 <div className="container" style={{ marginTop: 30, marginBottom: 30 }}>
                 <SearchBar />
-                <Profile />
                 </div>
             </Fragment>
         )

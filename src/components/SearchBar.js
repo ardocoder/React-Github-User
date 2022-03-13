@@ -1,5 +1,7 @@
 import axios from "axios";
-import React, {useState} from "react";
+import React, {Fragment, useState} from "react";
+import Profile from "./Profile";
+import RepoList from "./RepoList";
 
 const SearchBar = () => {
     const [searchInput, setSearchInput] = useState('');
@@ -12,12 +14,19 @@ const SearchBar = () => {
     const handleClick = async () => {
         console.log(searchInput)
 
-        const res = await axios('https://api.github.com/users/:username')
+        try {
+            const res = await axios(`https://api.github.com/users/${searchInput}/repos`)
+            setRepos(res);       
+        } catch(err) {
+            console.log(err)
+        }
 
-        setRepos(res);
-    }
+    };
+
+    console.log(repos);
 
     return (
+        <Fragment>
         <div className="row" style={{ marginTop: 30, marginBottom: 30 }}>
             <div className="col">
             <h3>Search Github User</h3>
@@ -47,6 +56,9 @@ const SearchBar = () => {
             </div>
             </div>
         </div>
+        <Profile />
+        <RepoList repos={repos} />
+        </Fragment>
     )
 }
 
